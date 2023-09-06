@@ -4,12 +4,16 @@
     <h2>Все книги</h2>
     {% for book in books %}
     <ul>
-        <li>Название: {{book.name}}</li>
+        <li>Название: {{book.title}}</li>
+        {% if book.author %}
+        <li>Автор: {{book.author}}</li>
+        {% endif %}
         <li>Дата добавления: {{ book.added }}</li>
         <li>Жанр: <a href=
              "{{url_for('all_genre_books', genre_id=book.genre_id)}}">
-             {{ book.genre.name }}</a></li>
-        </ul>
+             {{ book.genre.genre }}</a></li>
+        <li>Прочитана: {{ book.is_read }}</li>
+    </ul>
     <hr>
     {% endfor %}
 {% endblock %}
