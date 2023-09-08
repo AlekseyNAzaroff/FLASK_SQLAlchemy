@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h2>Все книги в жанре {{ genre }}</h2>
+    <h2>Все книги в жанре {{ name }}</h2>
     {% for book in books %}
     <ul>
         <li>Название: {{ book.title }}</li>

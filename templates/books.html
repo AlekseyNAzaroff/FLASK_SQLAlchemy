@@ -7,8 +7,7 @@
         <li>Название: {{ book.title }}</li>
         <li>Автор: {{ book.author }}</li>
         <li>Дата добавления: {{ book.added }}</li>
-        <li>Жанр: <a href=
-             "{{url_for('all_genre_books', genre_id=book.genre_id)}}">
+        <li>Жанр:
              {{ book.genre.name }}</a></li>
         <li>Прочитана: {{ book.is_read }}</li>
     </ul>

@@ -11,7 +11,7 @@ class Book(db.Model):
     author = db.Column(db.String)
     added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     genre_id = db.Column(db.Integer,
-                     db.ForeignKey('genre.id', ondelete='SET NULL'))
+                         db.ForeignKey('genre.id', ondelete='SET NULL'))
     genre = relationship('Genre', back_populates='books')
     is_read = db.Column(db.Boolean, nullable=True, default=False)
 
@@ -21,8 +21,8 @@ class Book(db.Model):
 
 class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    genre = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False, unique=True)
     books = relationship('Book', back_populates='genre')
 
     def __repr__(self):
-        return self.genre
+        return self.name
