@@ -19,11 +19,12 @@ def create_book():
             author = request.form['author']
             genre_name = request.form['genre']
             genre = db.session.query(Genre).filter_by(name=genre_name).first()
-            if genre is None:
+            if genre is None and title != '':
                 genre = Genre(name=genre_name)
                 db.session.add(genre)
                 db.session.commit()
-            book = Book(title=title, author=author)
+            genre_id = genre.id
+            book = Book(title=title, author=author, genre_id=genre_id)
             db.session.add(book)
             db.session.commit()
         except:
@@ -33,20 +34,8 @@ def create_book():
 
 
 @app.route(API_ROOT + 'books/')
-def books():
-    books = Book.query.all()
-    return render_template('books.html', books=books)
-
-
-@app.route(API_ROOT + 'genres/')
-def genres():
-    genres = Genre.query.all()
-    return render_template('genres.html', genres=genres)
-
-
-@app.route(API_ROOT + 'book/')
 def all_books():
-    books = Book.query.all()
+    books = Book.query.order_by(Book.added.desc()).limit(15)
     return render_template('all_books.html', books=books)
 
 
